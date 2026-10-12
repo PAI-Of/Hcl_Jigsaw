@@ -18,7 +18,7 @@
           </p>
           <div class="privacy-note">
             <Lock :size="14" />
-            <span>Local privacy architecture: Message evaluations run directly on your local machine via llama.cpp.</span>
+            <span>Privacy Architecture: Real-time evaluations processed with zero cloud retention.</span>
           </div>
         </div>
 

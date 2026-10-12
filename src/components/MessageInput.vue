@@ -135,11 +135,11 @@ function populateExample(text) {
 function handleAnalyze() {
   const trimmed = inputText.value.trim();
   if (!trimmed) {
-    errorMessage.value = 'Please paste or type a suspicious message or link to analyze.';
+    errorMessage.value = '[E-INPUT-EMPTY] Please paste or type a suspicious message or link to analyze.';
     return;
   }
   if (trimmed.length < 5) {
-    errorMessage.value = 'Message is too short to inspect. Please provide the full message or context.';
+    errorMessage.value = '[E-INPUT-SHORT] Message is too short to inspect (minimum 5 characters required).';
     return;
   }
 

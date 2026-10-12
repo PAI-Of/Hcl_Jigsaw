@@ -85,7 +85,7 @@
         </div>
         <div class="notice-content">
           <strong class="notice-title">
-            {{ modelReadiness.canAnalyze ? 'Vision Model Active' : 'Model Architecture Note' }}
+            {{ modelReadiness.canAnalyze ? 'Vision Engine Active' : 'Notice: E-MMPROJ' }}
           </strong>
           <p class="notice-body">{{ modelReadiness.message }}</p>
         </div>
@@ -156,12 +156,12 @@ function validateAndLoadFile(file) {
 
   const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
   if (!validTypes.includes(file.type)) {
-    validationError.value = `Unsupported file type: "${file.type || 'unknown'}". Please select PNG, JPG, or WebP.`;
+    validationError.value = `[E-FILE-UNSUPPORTED] Unsupported file type: "${file.type || 'unknown'}". Please select a PNG, JPG, or WebP image.`;
     return;
   }
 
   if (file.size > maxBytes) {
-    validationError.value = `File size (${(file.size / (1024 * 1024)).toFixed(1)}MB) exceeds maximum limit of ${maxMb}MB.`;
+    validationError.value = `[E-FILE-TOOLARGE] File size (${(file.size / (1024 * 1024)).toFixed(1)}MB) exceeds maximum limit of ${maxMb}MB.`;
     return;
   }
 

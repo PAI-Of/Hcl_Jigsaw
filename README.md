@@ -224,13 +224,31 @@ Open `src/data/examples.js`. Modify existing sample items or add new fictional e
 
 ## 11. Known Limitations
 
-- **Simulated Text Analysis:** Threat percentages represent pattern-based heuristics computed by the local language model; they are not live ISP domain lookups.
-- **Multimodal Models:** Screenshots require a multimodal vision model (e.g. LLaVA or MiniCPM-V) or local OCR. When using a text-only model, users are guided to transcribe or copy text directly.
+- **Simulated Text Analysis:** Threat percentages represent pattern-based heuristics computed by the language model; they are not live ISP domain lookups.
+- **Multimodal Models:** Screenshots require a multimodal vision model (e.g. LLaVA or MiniCPM-V) or local OCR. When using a text-only model, the system displays `E-MMPROJ` and guides users to transcribe or copy text directly.
 - **Official Reporting:** CyberShield AI is an educational tool and does not file complaints on behalf of citizens. All reports must be filed directly at [cybercrime.gov.in](https://cybercrime.gov.in/) or via helpline `1930`.
 
 ---
 
-## 12. 30-Point Web Design Audit Report
+## 12. Error Code Architecture & Diagnostic Matrix
+
+CyberShield AI uses self-descriptive, production-grade error codes instead of displaying internal stack traces or verbose engine architecture notes in the user interface.
+
+| Error Code | Name | Real Technical Definition & Cause | User-Facing Action / Remediation |
+|---|---|---|---|
+| **`E-MMPROJ`** | Multimodal Projector Missing | **Occurs when screenshot analysis is attempted, but the loaded AI model does not support vision or image tokenization.** The engine lacks an active multimodal projector (`mmproj` / CLIP vision projection adapter). Because standard text LLMs cannot process 2D raw pixel matrices, the system prevents execution. | Transcribe or paste the message text into the inspection textarea. To enable native image analysis, launch a vision-capable model (e.g. LLaVA or MiniCPM-V) and set `"supportsVision": true` in `app.config.json`. |
+| **`E-SERVER-UNAVAILABLE`** | Inference Service Unreachable | **Occurs when the browser fails to establish an HTTP/TCP socket connection to the inference server at `http://127.0.0.1:8080`.** Common causes include: inference service is stopped, wrong host/port configured in `app.config.json`, or the browser's Cross-Origin Resource Sharing (CORS) security policy blocked the connection. | Ensure the inference service is actively running and listening on port 8080. If connecting across a local network, update `"baseUrl"` to match the host IP. |
+| **`E-TIMEOUT`** | Inference Timeout | **Occurs when an inference request exceeds the configured `timeoutMs` threshold (default 60,000ms) without returning complete token generation.** Typically caused by GPU out-of-memory thrashing, high compute contention, or CPU thread saturation. | Retry the analysis request. If using a large model on CPU compute, increase `"timeoutMs"` in `src/config/app.config.json`. |
+| **`E-PAYLOAD-INVALID`** | Malformed Schema Response | **Occurs when the inference engine returns HTTP 200 but the response body cannot be parsed into the structured risk assessment schema.** This happens if token generation was prematurely terminated (exhausting `maxTokens`) or if the model failed to follow the requested JSON structure. | Increase `"maxTokens"` in configuration or retry the prompt. |
+| **`E-SERVER-ERROR`** | HTTP Server Error | **Occurs when the inference service responds with an HTTP 4xx or 5xx status code (e.g. 500 internal server failure, 400 invalid parameter, or 404 endpoint not found).** Typically indicates a crashed worker thread or malformed context payload. | Inspect the inference server console output for CUDA errors or context limit violations. |
+| **`E-FILE-TOOLARGE`** | File Payload Limit Exceeded | **Occurs when an uploaded screenshot file exceeds `maxScreenshotSizeBytes` (default 5 MB / 5,242,880 bytes).** Prevents memory exhaustion on client devices. | Compress or resize the screenshot below 5 MB before uploading. |
+| **`E-FILE-UNSUPPORTED`** | Unsupported MIME Format | **Occurs when an uploaded file is not an allowed image format (PNG, JPG, JPEG, or WebP).** Prevents execution of dangerous files (e.g., `.exe`, `.apk`, `.html`). | Ensure the file is a standard static image format (PNG, JPG, JPEG, or WebP). |
+| **`E-INPUT-SHORT`** | Insufficient Input Entropy | **Occurs when submitted text contains fewer than 5 characters.** Shorter snippets do not provide sufficient linguistic context for evidence-based threat scoring. | Provide the full text of the suspicious SMS, WhatsApp message, or URL. |
+| **`E-INPUT-EMPTY`** | Empty Inspection Request | **Occurs when an analysis action is triggered with empty whitespace.** | Paste or type the message content before clicking Analyze. |
+
+---
+
+## 13. 30-Point Web Design Audit Report
 
 The entire HTML, CSS, component architecture, and copy were audited against the 30 design checks specified in Section 9.
 
@@ -257,6 +275,6 @@ The entire HTML, CSS, component architecture, and copy were audited against the 
 
 ---
 
-## 13. License
+## 14. License
 
 Developed for the **HCL Jigsaw Class 9 AI Scam Detection & Cyber Safety Hackathon**. Free for educational and non-commercial public safety use.

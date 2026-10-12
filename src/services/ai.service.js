@@ -156,7 +156,7 @@ export function normalizeAssessment(parsed) {
 }
 
 /**
- * Checks connectivity to the configured local llama.cpp server
+ * Checks connectivity to the configured inference server
  * @returns {Promise<{ ok: boolean, latencyMs?: number, error?: string }>}
  */
 export async function checkAiHealth() {
@@ -186,13 +186,13 @@ export async function checkAiHealth() {
     clearTimeout(timeoutId);
     return {
       ok: false,
-      error: 'The local AI server could not be reached. Make sure llama.cpp is running and its configured address is correct.'
+      error: '[E-SERVER-UNAVAILABLE] Threat analysis engine is offline or unreachable.'
     };
   }
 }
 
 /**
- * Sends chat completion request to the configured llama.cpp server
+ * Sends chat completion request to the configured inference endpoint
  * @param {Array<{ role: string, content: string }>} conversationMessages
  * @param {AbortSignal} [signal]
  * @returns {Promise<{ text: string, structured: object|null }>}
@@ -209,7 +209,7 @@ export async function sendChatCompletion(conversationMessages, signal = null) {
 
   const controller = new AbortController();
   const timeoutId = setTimeout(() => {
-    controller.abort(new Error(`AI request timed out after ${timeoutMs}ms`));
+    controller.abort(new Error(`[E-TIMEOUT] Analysis request timed out after ${timeoutMs}ms`));
   }, timeoutMs);
 
   // Combine signals if external signal is provided
@@ -236,13 +236,13 @@ export async function sendChatCompletion(conversationMessages, signal = null) {
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => '');
-      throw new Error(`AI service returned HTTP ${response.status}: ${errorText || response.statusText}`);
+      throw new Error(`[E-SERVER-ERROR] Engine returned HTTP ${response.status}: ${errorText || response.statusText}`);
     }
 
     const data = await response.json();
 
     if (!data || !data.choices || !data.choices.length || !data.choices[0].message) {
-      throw new Error('AI service returned an unexpected response structure.');
+      throw new Error('[E-PAYLOAD-INVALID] Engine returned an unparseable response structure.');
     }
 
     const rawReply = data.choices[0].message.content || '';
@@ -257,12 +257,12 @@ export async function sendChatCompletion(conversationMessages, signal = null) {
     clearTimeout(timeoutId);
 
     if (err.name === 'AbortError') {
-      throw new Error('Request was cancelled or timed out.');
+      throw new Error('[E-TIMEOUT] Request was cancelled or timed out.');
     }
 
     // Network / connection errors
     if (err instanceof TypeError && err.message.toLowerCase().includes('failed to fetch')) {
-      throw new Error('The local AI server could not be reached. Make sure llama.cpp is running and its configured address is correct.');
+      throw new Error('[E-SERVER-UNAVAILABLE] Threat analysis engine is offline or unreachable.');
     }
 
     throw err;

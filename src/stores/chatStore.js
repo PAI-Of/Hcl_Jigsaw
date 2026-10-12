@@ -34,7 +34,7 @@ export const chatStore = reactive({
   },
 
   /**
-   * Sends user message to the local llama.cpp server
+   * Sends user message to the configured analysis engine
    */
   async submitUserMessage(userText) {
     if (!userText || !userText.trim()) return;
@@ -61,7 +61,7 @@ export const chatStore = reactive({
         content: m.content
       }));
 
-      // Call llama.cpp
+      // Call analysis engine
       const response = await sendChatCompletion(apiMessages);
 
       // Add AI reply to history

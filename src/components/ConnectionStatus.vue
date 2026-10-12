@@ -14,9 +14,9 @@
     >
       <span class="status-indicator-dot"></span>
       <span class="status-label">
-        <template v-if="isChecking">Checking AI...</template>
-        <template v-else-if="status.isOnline">AI Server Connected ({{ status.latencyMs }}ms)</template>
-        <template v-else>AI Server Offline</template>
+        <template v-if="isChecking">Checking Engine...</template>
+        <template v-else-if="status.isOnline">Threat Engine Active ({{ status.latencyMs }}ms)</template>
+        <template v-else>[E-SERVER-UNAVAILABLE] Engine Offline</template>
       </span>
       <RotateCw v-if="isChecking" class="spin-icon" :size="14" />
     </button>
@@ -34,11 +34,11 @@ const isChecking = ref(false);
 const status = computed(() => chatStore.connectionState);
 
 const tooltipText = computed(() => {
-  if (isChecking.value) return 'Testing connection to local llama.cpp...';
+  if (isChecking.value) return 'Testing connection to threat analysis engine...';
   if (status.value.isOnline) {
-    return `Connected to llama.cpp at ${appConfig.ai.baseUrl} (${status.value.latencyMs}ms). Click to re-check.`;
+    return `Threat Analysis Engine Active (${status.value.latencyMs}ms). Click to re-check.`;
   }
-  return `Local AI server unreachable at ${appConfig.ai.baseUrl}. Ensure llama.cpp is running. Click to retry.`;
+  return `[E-SERVER-UNAVAILABLE] Threat analysis engine is unreachable. Click to retry.`;
 });
 
 async function runCheck() {

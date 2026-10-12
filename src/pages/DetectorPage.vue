@@ -12,7 +12,7 @@
               </div>
               <div class="chat-title-group">
                 <h2 class="chat-title">AI Scam Detector</h2>
-                <span class="chat-subtitle">Direct inference via local llama.cpp</span>
+                <span class="chat-subtitle">Automated threat assessment & fraud pattern verification</span>
               </div>
             </div>
 
@@ -82,7 +82,7 @@
                   <span></span>
                   <span></span>
                 </div>
-                <span class="loading-label">Analyzing message evidence with local model...</span>
+                <span class="loading-label">Analyzing message evidence...</span>
               </div>
             </div>
 
@@ -91,7 +91,7 @@
               <div class="error-header">
                 <AlertOctagon :size="20" class="error-icon" />
                 <div class="error-text-group">
-                  <strong class="error-title">AI Inference Error</strong>
+                  <strong class="error-title">Analysis Service Notice</strong>
                   <p class="error-body">{{ lastError }}</p>
                 </div>
               </div>
@@ -136,7 +136,7 @@
             </div>
             <div class="composer-meta">
               <span class="meta-hint">Press Enter to send &bull; Shift+Enter for a new line</span>
-              <span class="meta-disclaimer">Local AI inference &bull; Strictly educational</span>
+              <span class="meta-disclaimer">Zero Cloud Retention &bull; Strictly Educational</span>
             </div>
           </div>
         </main>

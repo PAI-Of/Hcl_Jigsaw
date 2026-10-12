@@ -67,18 +67,20 @@ export function evaluateScreenshotReadiness(imageFile) {
   const { supportsVision, model } = appConfig.ai;
 
   if (!imageFile) {
-    return { canAnalyze: false, message: 'No screenshot selected.' };
+    return { canAnalyze: false, code: 'E-FILE-EMPTY', message: 'No screenshot selected.' };
   }
 
   if (!supportsVision) {
     return {
       canAnalyze: false,
-      message: `The currently configured local model ("${model}") is a text-only language model. Processing images directly requires a multimodal vision model (such as LLaVA or MiniCPM-V in llama.cpp). Please transcribe or paste the text from your screenshot into the message input for immediate analysis.`
+      code: 'E-MMPROJ',
+      message: '[E-MMPROJ] Image analysis requires a multimodal project configuration. Please transcribe or paste the text from your screenshot into the message input for immediate inspection.'
     };
   }
 
   return {
     canAnalyze: true,
-    message: 'Multimodal vision model is configured.'
+    code: 'OK-VISION',
+    message: 'Multimodal vision engine active.'
   };
 }
