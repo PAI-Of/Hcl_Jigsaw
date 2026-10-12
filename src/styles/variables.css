@@ -1,0 +1,44 @@
+/* Centralized CSS custom properties initialized from configuration */
+:root {
+  /* Dynamic values overridden via applyThemeToCssVariables() in src/config/index.js */
+  --color-primary: #183B35;
+  --color-primary-hover: #122c27;
+  --color-background: #F7F8F5;
+  --color-surface: #FFFFFF;
+  --color-text: #202824;
+  --color-muted: #68736D;
+  --color-border: #DDE3DD;
+  --color-accent: #D7E8A6;
+  --color-accent-text: #183B35;
+  
+  /* Semantic risk colors */
+  --color-danger: #B42318;
+  --color-danger-bg: #FEE4E2;
+  --color-warning: #925C08;
+  --color-warning-bg: #FEF0C7;
+  --color-success: #18794E;
+  --color-success-bg: #D1FADF;
+
+  /* Typography */
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Headings typography specifications */
+  --lh-heading: 1.2;
+  --lh-body: 1.65;
+  --letter-spacing-heading: -0.025em;
+
+  /* Radii & Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows: restricted to max 1-2 element types across the app */
+  --shadow-card: 0 1px 3px rgba(24, 59, 53, 0.05);
+  --shadow-floating: 0 4px 16px rgba(24, 59, 53, 0.08);
+
+  /* Touch target size */
+  --min-touch-target: 44px;
+}

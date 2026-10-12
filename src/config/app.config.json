@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "CyberShield AI",
+    "shortName": "CyberShield",
+    "tagline": "Think Before You Click.",
+    "description": "Identify scams, verify suspicious messages, and learn to stay safe online.",
+    "version": "1.0.0"
+  },
+  "ai": {
+    "provider": "llama.cpp",
+    "baseUrl": "http://127.0.0.1:8080",
+    "chatEndpoint": "/v1/chat/completions",
+    "model": "local-model",
+    "temperature": 0.2,
+    "maxTokens": 1200,
+    "timeoutMs": 60000,
+    "maxScreenshotSizeBytes": 5242880,
+    "supportsVision": false
+  },
+  "theme": {
+    "primary": "#183B35",
+    "background": "#F7F8F5",
+    "surface": "#FFFFFF",
+    "text": "#202824",
+    "muted": "#68736D",
+    "border": "#DDE3DD",
+    "accent": "#D7E8A6",
+    "danger": "#B42318",
+    "warning": "#925C08",
+    "success": "#18794E"
+  },
+  "navigation": {
+    "homeLabel": "Home",
+    "chatLabel": "Scam Detector",
+    "courseLabel": "Safety Academy"
+  },
+  "content": {
+    "country": "India",
+    "cyberCrimePortal": "https://cybercrime.gov.in/",
+    "emergencyCyberCrimeHelpline": "1930"
+  }
+}
