@@ -17,6 +17,10 @@
             </div>
 
             <div class="chat-controls">
+              <router-link to="/check-website" class="btn-control-ghost" title="Check Website Genuineness">
+                <Globe :size="15" />
+                <span>Verify Website URL</span>
+              </router-link>
               <button
                 v-if="messages.length > 0"
                 type="button"
@@ -147,7 +151,7 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue';
-import { ShieldCheck, ShieldAlert, Trash2, Send, HelpCircle, AlertOctagon, AlertTriangle, RotateCw } from 'lucide-vue-next';
+import { ShieldCheck, ShieldAlert, Trash2, Send, HelpCircle, AlertOctagon, AlertTriangle, RotateCw, Globe } from 'lucide-vue-next';
 import { chatStore } from '../stores/chatStore.js';
 import { inspectForSensitiveData } from '../services/analysis.service.js';
 import ChatMessage from '../components/ChatMessage.vue';

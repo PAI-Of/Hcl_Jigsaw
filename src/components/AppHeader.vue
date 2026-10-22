@@ -24,6 +24,9 @@
           <router-link to="/chat" class="nav-link" active-class="nav-link-active">
             {{ config.navigation.chatLabel }}
           </router-link>
+          <router-link to="/check-website" class="nav-link" active-class="nav-link-active">
+            {{ config.navigation.websiteCheckerLabel || 'Website Checker' }}
+          </router-link>
           <router-link to="/learn" class="nav-link" active-class="nav-link-active">
             {{ config.navigation.courseLabel }}
           </router-link>
@@ -60,6 +63,10 @@
           <ShieldAlert :size="18" />
           {{ config.navigation.chatLabel }}
         </router-link>
+        <router-link to="/check-website" class="mobile-nav-link" @click="closeMobileMenu">
+          <Globe :size="18" />
+          {{ config.navigation.websiteCheckerLabel || 'Website Checker' }}
+        </router-link>
         <router-link to="/learn" class="mobile-nav-link" @click="closeMobileMenu">
           <GraduationCap :size="18" />
           {{ config.navigation.courseLabel }}
@@ -76,7 +83,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Menu, X, Home, ShieldAlert, GraduationCap } from 'lucide-vue-next';
+import { Menu, X, Home, ShieldAlert, GraduationCap, Globe } from 'lucide-vue-next';
 import appConfig from '../config/app.config.json';
 import ConnectionStatus from './ConnectionStatus.vue';
 

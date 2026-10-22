@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import DetectorPage from '../pages/DetectorPage.vue';
+import WebsiteCheckerPage from '../pages/WebsiteCheckerPage.vue';
 import AcademyPage from '../pages/AcademyPage.vue';
 import CoursePage from '../pages/CoursePage.vue';
 import ReportGuidePage from '../pages/ReportGuidePage.vue';
@@ -15,6 +16,12 @@ const routes = [
     path: '/chat',
     name: 'detector',
     component: DetectorPage
+  },
+  {
+    path: '/check-website',
+    alias: '/verify-website',
+    name: 'website-checker',
+    component: WebsiteCheckerPage
   },
   {
     path: '/learn',

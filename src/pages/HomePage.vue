@@ -23,6 +23,21 @@
 
           <!-- Side Editorial Guidelines Column -->
           <aside class="hero-sidebar" aria-label="Quick Verification Guidelines">
+            <!-- Website Verifier Callout -->
+            <div class="sidebar-box website-verifier-box">
+              <div class="box-icon-row">
+                <Globe :size="20" />
+                <span class="box-tag">New Tool</span>
+              </div>
+              <h3 class="box-title">Website Genuineness Verifier</h3>
+              <p class="box-desc">
+                Paste any web address to check HTTPS security, DuckDuckGo reputation overview, and Cheerio-scraped plain text.
+              </p>
+              <router-link to="/check-website" class="btn btn-primary btn-full">
+                Verify Website Now <ArrowRight :size="14" />
+              </router-link>
+            </div>
+
             <!-- Emergency Helpline Callout -->
             <div class="sidebar-box emergency-box">
               <div class="box-icon-row">
@@ -80,7 +95,7 @@
 </template>
 
 <script setup>
-import { Shield, PhoneCall, AlertOctagon, GraduationCap, ArrowRight } from 'lucide-vue-next';
+import { Shield, PhoneCall, AlertOctagon, GraduationCap, ArrowRight, Globe } from 'lucide-vue-next';
 import MessageInput from '../components/MessageInput.vue';
 </script>
 
@@ -142,6 +157,14 @@ import MessageInput from '../components/MessageInput.vue';
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+}
+
+.website-verifier-box {
+  border-left: 4px solid var(--color-primary);
+  background-color: #F8FAF8;
+}
+.website-verifier-box .box-icon-row {
+  color: var(--color-primary);
 }
 
 .emergency-box {

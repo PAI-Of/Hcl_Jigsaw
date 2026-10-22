@@ -9,6 +9,7 @@
 
 **CyberShield AI** bridges the gap between everyday communication and cyber safety. Rather than offering a simple static landing page or visual prototype, CyberShield AI delivers:
 - **Instant Message Inspection:** Direct interactive text inspection powered by an OpenAI-compatible local AI inference server ([llama.cpp](https://github.com/ggerganov/llama.cpp)).
+- **Website Genuineness Verifier:** Dedicated URL verification engine that tests HTTPS protocol presence, analyzes DuckDuckGo search reputation overview (flagging scam/fraud warnings), and scrapes visible web text using Cheerio with strict token optimization (extracting pure human text only, excluding raw HTML markup/styles).
 - **Structured Threat Assessment:** Quantitative risk scoring (0–100%), model confidence (0–100%), indicator breakdowns, actionable next steps, and official verification paths.
 - **Privacy-First Architecture:** 100% client-side and local machine execution. No third-party cloud AI APIs, no databases, and no cloud data leakage.
 - **Safety Academy:** 10 comprehensive, evidence-based modules covering UPI fraud, phishing, OTP hijacking, police/CBI impersonation ("digital arrest"), malicious APK files, job frauds, and more.
@@ -24,6 +25,7 @@
 - **Language:** JavaScript (ES Modules)
 - **Styling:** Pure CSS3 with centralized CSS Custom Properties (No Tailwind, No Bootstrap)
 - **Routing:** [Vue Router 4](https://router.vuejs.org/)
+- **HTML Parsing & Token Optimization:** [Cheerio](https://cheerio.js.org/)
 - **Icons:** [Lucide Vue Next](https://lucide.dev/) (SVG vector icons; strictly zero emojis as icons)
 - **AI Inference Engine:** Local [llama.cpp](https://github.com/ggerganov/llama.cpp) server running on `http://127.0.0.1:8080` (OpenAI-compatible `/v1/chat/completions` endpoint)
 

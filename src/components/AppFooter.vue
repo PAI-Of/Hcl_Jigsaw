@@ -60,6 +60,7 @@
         <div class="footer-bottom-links">
           <router-link to="/learn/report-cybercrime">Cybercrime Reporting Procedure</router-link>
           <router-link to="/chat">AI Message Inspector</router-link>
+          <router-link to="/check-website">Website Checker</router-link>
         </div>
       </div>
     </div>
